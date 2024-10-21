@@ -1,4 +1,4 @@
-package com.example.spring.orderservice.domain;
+package com.example.spring.orderservice.order.domain;
 
 import lombok.Builder;
 import org.springframework.data.annotation.CreatedDate;

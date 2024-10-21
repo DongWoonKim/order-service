@@ -1,4 +1,4 @@
-package com.example.spring.orderservice.domain;
+package com.example.spring.orderservice.order.domain;
 
 public enum OrderStatus {
     ACCEPTED,
