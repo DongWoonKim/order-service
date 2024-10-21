@@ -3,7 +3,15 @@ spring:
     name: order-service
   lifecycle:
     timeout-per-shutdown-phase: 15s
-    
+  r2dbc:
+    username: catalog_user
+    password: 1234
+    url: r2dbc:mysql://localhost:3307/order
+    pool:
+      max-create-connection-time: 2s
+      initial-size: 5
+      max-size: 10
+
 server:
   port: 9002
   shutdown: graceful
