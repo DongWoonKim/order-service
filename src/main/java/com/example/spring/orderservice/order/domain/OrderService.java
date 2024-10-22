@@ -39,7 +39,7 @@ public class OrderService {
         return Order.builder()
                 .bookIsbn(isbn)
                 .quantity(quantity)
-                .status(OrderStatus.ACCEPTED)
+                .status(OrderStatus.REJECTED)
                 .build();
     }
 
