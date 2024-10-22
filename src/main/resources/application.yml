@@ -16,7 +16,6 @@ spring:
     password: ${spring.r2dbc.password}
     url: jdbc:mysql://localhost:3307/order
 
-
 server:
   port: 9002
   shutdown: graceful

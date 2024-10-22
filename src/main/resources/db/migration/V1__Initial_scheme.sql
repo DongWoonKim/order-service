@@ -1,5 +1,5 @@
-CREATE TABLE orders (
-    id BIGINT PRIMARY KEY NOT NULL,
+CREATE TABLE IF NOT EXISTS orders (
+    id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     book_isbn VARCHAR(255) NOT NULL,
     book_name VARCHAR(255),
     book_price DECIMAL(10, 2), -- DECIMAL 타입으로 변경
