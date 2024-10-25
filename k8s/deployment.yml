@@ -30,6 +30,6 @@ spec:
             - name: SPRING_CLOUD_CONFIG_URI
               value: http://config-service:8888
             - name: SPRING_R2DBC_URL
-              value: r2dbc:mysql://localhost:3307/order
+              value: r2dbc:mysql://polar-mysql:3306/order
             - name: SPRING_FLYWAY_URL
-              value: jdbc:mysql://localhost:3307/order
+              value: jdbc:mysql://polar-mysql:3306/order

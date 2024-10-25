@@ -46,6 +46,21 @@ dependencies {
     testImplementation 'com.squareup.okhttp3:mockwebserver'
 }
 
+
+bootBuildImage {
+    imageName = "${project.name}"
+    environment = ["BP_JVM_VERSION": "21"]
+
+    docker {
+        publishRegistry {
+            username = project.findProperty("registryUsername")
+            password = project.findProperty("registryToken")
+            url = project.findProperty("registryUrl")
+        }
+    }
+}
+
+
 tasks.named('test') {
     useJUnitPlatform()
 }

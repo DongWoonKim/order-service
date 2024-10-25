@@ -4,9 +4,9 @@ spring:
   lifecycle:
     timeout-per-shutdown-phase: 15s
   r2dbc:
-    username: catalog_user
+    username: user
     password: 1234
-    url: r2dbc:mysql://polar-mysql:3307/order
+    url: r2dbc:mysql://polar-mysql:3306/order
     pool:
       max-create-connection-time: 2s
       initial-size: 5
@@ -14,7 +14,7 @@ spring:
   flyway:
     user: ${spring.r2dbc.username}
     password: ${spring.r2dbc.password}
-    url: jdbc:mysql://polar-mysql:3307/order
+    url: jdbc:mysql://polar-mysql:3306/order
   cloud:
     config:
       uri: http://config-service:8888
