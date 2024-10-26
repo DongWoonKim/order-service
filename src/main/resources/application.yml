@@ -6,7 +6,7 @@ spring:
   r2dbc:
     username: user
     password: 1234
-    url: r2dbc:mysql://polar-mysql:3306/order
+    url:  ${SPRING_R2DBC_URL:r2dbc:mysql://localhost:3306/order}
     pool:
       max-create-connection-time: 2s
       initial-size: 5
@@ -14,11 +14,10 @@ spring:
   flyway:
     user: ${spring.r2dbc.username}
     password: ${spring.r2dbc.password}
-    url: jdbc:mysql://polar-mysql:3306/order
+    url: ${SPRING_FLYWAY_URL:jdbc:mysql://localhost:3306/order}
   cloud:
     config:
-      uri: http://config-service:8888
-#      uri: http://localhost:8888
+      uri: ${CONFIG_SERVICE_URL:http://localhost:8888}
       request-connect-timeout: 5000
       request-read-timeout: 5000
       fail-fast: true
@@ -36,4 +35,4 @@ server:
     idle-timeout: 15s
 
 polar:
-  catalog-service-uri: "http://localhost:9001"
+  catalog-service: ${CATALOG_SERVICE_URL:http://localhost:9001}
