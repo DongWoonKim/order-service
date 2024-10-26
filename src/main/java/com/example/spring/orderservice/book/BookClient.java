@@ -14,15 +14,13 @@ import java.time.Duration;
 @RequiredArgsConstructor
 public class BookClient {
 
-    @Value("${polar.catalog-service}")
-    private String CATALOG_SERVICE;
     private static final String BOOKS_ROOT_API = "/books";
     private final WebClient webClient;
 
     public Mono<Book> getBookByIsbn(String isbn) {
         return webClient
                 .get()
-                .uri(CATALOG_SERVICE + "/" + BOOKS_ROOT_API + "/" + isbn)
+                .uri( BOOKS_ROOT_API + "/" + isbn)
                 .retrieve() // 요청을 보내고 응답을 기다린다.
                 .bodyToMono(Book.class)
                 .timeout(Duration.ofSeconds(3))

@@ -35,4 +35,4 @@ server:
     idle-timeout: 15s
 
 polar:
-  catalog-service: ${CATALOG_SERVICE_URL:http://localhost:9001}
+  catalog-service-uri: ${CATALOG_SERVICE_URL:http://localhost:9001}
