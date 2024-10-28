@@ -2,6 +2,7 @@ package com.example.spring.orderservice.order.domain;
 
 import com.example.spring.orderservice.book.Book;
 import com.example.spring.orderservice.book.BookClient;
+import com.example.spring.orderservice.order.event.OrderDispatchedMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -41,6 +42,28 @@ public class OrderService {
                 .quantity(quantity)
                 .status(OrderStatus.REJECTED)
                 .build();
+    }
+
+    private Order buildDispatchedOrder(Order existingOrder) {
+        return Order.builder()
+                .id(existingOrder.id())
+                .bookIsbn(existingOrder.bookIsbn())
+                .bookName(existingOrder.bookName())
+                .bookPrice(existingOrder.bookPrice())
+                .quantity(existingOrder.quantity())
+                .status(OrderStatus.DISPATCHED)
+                .createdDate(existingOrder.createdDate())
+                .lastModifiedDate(existingOrder.lastModifiedDate())
+                .version(existingOrder.version())
+                .build();
+    }
+
+    public Flux<Order> consumerOrderDispatchedEvent(Flux<OrderDispatchedMessage> flux) {
+        return flux
+                .flatMap(message ->
+                        orderRepository.findById(message.orderId()))
+                .map(this::buildDispatchedOrder)
+                .flatMap(orderRepository::save);
     }
 
 }
