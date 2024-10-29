@@ -1,6 +1,7 @@
 package com.example.spring.orderservice.order.domain;
 
 import lombok.Builder;
+import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;

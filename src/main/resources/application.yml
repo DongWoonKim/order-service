@@ -1,12 +1,21 @@
+server:
+  port: 9002
+  shutdown: graceful
+  netty:
+    connection-timeout: 2s
+    idle-timeout: 15s
+
 spring:
+  config:
+    import: "optional:configserver:"
   application:
     name: order-service
   lifecycle:
     timeout-per-shutdown-phase: 15s
   r2dbc:
-    username: user
+    username: root
     password: 1234
-    url:  ${SPRING_R2DBC_URL:r2dbc:mysql://localhost:3306/order}
+    url:  ${SPRING_R2DBC_URL:r2dbc:mysql://localhost:3307/order}
     pool:
       max-create-connection-time: 2s
       initial-size: 5
@@ -14,7 +23,7 @@ spring:
   flyway:
     user: ${spring.r2dbc.username}
     password: ${spring.r2dbc.password}
-    url: ${SPRING_FLYWAY_URL:jdbc:mysql://localhost:3306/order}
+    url: ${SPRING_FLYWAY_URL:jdbc:mysql://localhost:3307/order}
   cloud:
     config:
       uri: ${CONFIG_SERVICE_URL:http://localhost:8888}
@@ -32,20 +41,22 @@ spring:
       bindings:
         dispatchOrder-in-0:
           destination: order-dispatched
-          group: {spring.application.name}
+          group: ${spring.application.name}
+          contentType: application/json
+        acceptOrder-out-0:
+          destination: order-accepted
+          contentType: application/json
+      rabbit:
+        bindings:
+          acceptOrder-out-0:
+            producer:
+              transacted: true
   rabbitmq:
     host: localhost
     port: 5672
     username: user
     password: 1234
     connection-timeout: 5s
-
-server:
-  port: 9002
-  shutdown: graceful
-  netty:
-    connection-timeout: 2s
-    idle-timeout: 15s
 
 polar:
   catalog-service-uri: ${CATALOG_SERVICE_URL:http://localhost:9001}
