@@ -33,3 +33,5 @@ spec:
               value: r2dbc:mysql://polar-mysql:3306/order
             - name: SPRING_FLYWAY_URL
               value: jdbc:mysql://polar-mysql:3306/order
+            - name: SPRING_RABBITMQ_HOST
+              value: polar-rabbitmq
